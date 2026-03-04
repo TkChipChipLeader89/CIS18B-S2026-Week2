@@ -1,5 +1,6 @@
 package edu.norcocollege.cis18b.week2.demo;
-
+import java.util.List;
+import java.util.Optional;
 /**
  * This class is a review of basic Java language features. It’s not
  * meant to be comprehensive, but it should cover the basics and provide
@@ -7,9 +8,24 @@ package edu.norcocollege.cis18b.week2.demo;
  **/
 public class ModernFeaturesDemo {
 
+    //Record Dinosaur Type
+    public record Dinosaur(String name,String diet,int age);
+    //Demonstrate Modern Features
     public void demonstrate() {
-        // TODO: Implement demonstration of modern Java features
-        // NOTE: Remove the exception below when you've implemented your code
-        throw new UnsupportedOperationException("Not implemented yet");
+        //Create Greeting
+        String intro="""
+                Welcome to newly and questionable built Dinosaur Park!
+                I hope nothing goes wrong during your tour!
+                Enjoy!
+                """;
+        //Display Greeting
+        System.out.println(intro);
+        //Create Dinosaurs
+        var dino1=new Dinosaur("Velociraptor","CARNIVORE",8);
+        var dino2=new Dinosaur("Gallimimus","OMNIVORE",5);
+        var dino3=new Dinosaur("Pteranodon","CARNIVORE",10);
+        var dino4=new Dinosaur("Triceratops","HERBIVORE",3);
+        //Create a list of Dinosuars
+        var dinosaurs=List.of(dino1,dino2,dino3,dino4);
     }
 }
