@@ -2,6 +2,7 @@ package edu.norcocollege.cis18b.week2.alerts;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.ArrayList;
 
 /**
  * TODO:
@@ -14,14 +15,18 @@ import java.util.Optional;
 public class SecurityAlertManager {
 
     // TODO: Declare a private List<SecurityAlert> to store alerts
-
+    private List<SecurityAlert> alerts;
     /**
      * TODO:
      *  - Reject null
      *  - Add alert to internal list
      */
     public void addAlert(SecurityAlert alert) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        //validate alert & add to list
+        if(alert==null){
+            throw new IllegalArgumentException("Alert cannot be null");
+        }
+        alerts.add(alert);
     }
 
     /**
@@ -30,7 +35,13 @@ public class SecurityAlertManager {
      *  - Use streams to find first match
      */
     public Optional<SecurityAlert> findById(String id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        //validate id & find alert
+        if(id==null){
+            return Optional.empty();
+        }
+        return alerts.stream()
+            .filter(a->a.id().equals(id))
+            .findFirst();
     }
 
     /**
@@ -39,7 +50,13 @@ public class SecurityAlertManager {
      *  - Use streams to filter by severity
      */
     public List<SecurityAlert> findBySeverity(String severity) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        //validate severity & filter alerts
+        if(severity==null){
+            return List.of();
+        }
+        return alerts.stream()
+            .filter(a->a.severity().equalsIgnoreCase(severity))
+            .toList();
     }
 
     /**
@@ -48,7 +65,11 @@ public class SecurityAlertManager {
      *  - Return true if removed, false otherwise
      */
     public boolean removeAlert(String id) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        //validate id & remove alert
+        if(id==null){
+            return false;
+        }
+        return alerts.removeIf(a->a.id().equals(id));
     }
 
     /**
@@ -59,6 +80,19 @@ public class SecurityAlertManager {
      *  - Throw IllegalArgumentException for unknown severity
      */
     public String getSeverityRecommendation(SecurityAlert alert) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        //validate alert
+        if(alert==null){
+            throw new IllegalArgumentException("Alert cannot be null");
+        }
+        //pattern match alert & determine recommendation
+        if(alert instanceof SecurityAlert a){
+            return switch(a.severity().toUpperCase()){
+                case "LOW"->"Log and monitor.";
+                case "MEDIUM"->"Investigate within 24 hours.";
+                case "HIGH"->"Escalate to engineering.";
+                case "CRITICAL"->"Immediate incident response required.";
+                default -> throw new IllegalArgumentException("Unknown severity: "+a.severity());
+            };
+        }
     }
 }
