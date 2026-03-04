@@ -7,7 +7,6 @@ import java.util.Optional;
  * a refresher on syntax and concepts.
  **/
 public class ModernFeaturesDemo {
-
     //Record Dinosaur Type
     public record Dinosaur(String name,String diet,int age);
     //Demonstrate Modern Features
@@ -27,5 +26,19 @@ public class ModernFeaturesDemo {
         var dino4=new Dinosaur("Triceratops","HERBIVORE",3);
         //Create a list of Dinosuars
         var dinosaurs=List.of(dino1,dino2,dino3,dino4);
+        //Demonstrate Stream Operation For Carnivores
+        var carnivoreNames=dinosaurs.stream()
+            .filter(d->d.diet().equals("CARNIVORE"))
+            .map(Dinosaur::name)
+            .toList();
+        System.out.println("Carnivores: " + carnivoreNames);
+        //Demonstrate Optional Method
+        Optional<Dinosaur>selectedDino=dinosaurs.stream()
+            .filter(d-> d.name().equals("Pteranodon"))
+            .findFirst();
+        var result=selectedDino
+            .map(d->"Found dinosaur: "+d.name())
+            .orElse("Dinosaur not found!");
+        System.out.println(result);
     }
 }
