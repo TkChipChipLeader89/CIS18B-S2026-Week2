@@ -24,7 +24,7 @@ public class LanguageBasicsReview {
     }
     //Roar Method
     public void roar(){
-        System.out.println(dinosaurName+"ROARS LOUDLY!");
+        System.out.println(dinosaurName+" ROARS LOUDLY!");
     }
     //isExtinct Method
     public static boolean isExtinct(int year){
@@ -47,15 +47,37 @@ public class LanguageBasicsReview {
     public String dietType(String type) throws UnknownDinosaurTypeException{
         return switch (type.toUpperCase()){
             case "CARNIVORE"->"Eats meat!";
-            case "HERBIVORE"->"Eats Plants!"
+            case "HERBIVORE"->"Eats plants!";
             case "OMNIVORE"->"Eats both plants and meat!";
-            default -> throw new UnknownDinosaurTypeException("Unknown Dinosaur Type Diet: "+ type);
+            default -> throw new UnknownDinosaurTypeException("Unknown Dinosaur Type Diet: "+type);
         };
     }
     //Demonstrate All Features
     public void demonstrate() {
-        // TODO: Implement demonstration of basic Java features
-        // NOTE: Remove the exception below when you've implemented your code
-        throw new UnsupportedOperationException("Not implemented yet");
+        //Create Var Trex & initialize
+        var trex=new LanguageBasicsReview("T-rex");
+        //Demonstrate Roar Method
+        trex.roar();
+        //Demonstrate isExtinct Method
+        var extinct=isExtinct(2026);
+        System.out.println("Is dinosaur extinct? "+extinct);
+        //Demonstrate Eat Methods
+        var plantSource=trex.eat(10);
+        var meatSource=trex.eat(15.5);
+        System.out.println("Energy from plants: "+plantSource);
+        System.out.println("Energy from meat: "+meatSource);
+        //Creating a List of Dinosaurs
+        var dinosaurs=List.of("T-rex","Tenontosaurus","Oviraptor");
+        System.out.println("Known dinosaurs: "+dinosaurs);
+        //Demonstrate DietType & Custom Exception Method
+        try{
+            var diet=trex.dietType("Carnivore");
+            System.out.println("Diet type: "+diet);
+            //Trigger the Custom Exception
+            trex.dietType("Rock");
+        }catch(UnknownDinosaurTypeException e){
+            System.out.println("Caught Exception: "+e.getMessage());
+        }
+        System.out.println("Completed Dinosaur Demonstation!");
     }
 }
