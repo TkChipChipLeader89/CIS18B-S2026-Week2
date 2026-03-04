@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class SecurityAlertManager {
 
     // TODO: Declare a private List<SecurityAlert> to store alerts
-    private List<SecurityAlert> alerts;
+    private List<SecurityAlert> alerts = new ArrayList<>();
     /**
      * TODO:
      *  - Reject null

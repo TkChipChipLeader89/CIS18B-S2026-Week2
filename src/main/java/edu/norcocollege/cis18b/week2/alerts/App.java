@@ -35,9 +35,10 @@ public class App {
 
         // TODO: Query by severity and print results
         List<SecurityAlert>highAlerts=manager.findBySeverity("HIGH");
-        System.out.println("High Severity Alerts:");
-        highAlerts.forEach(a->System.out.println("- "+a.description()));
-        
+        System.out.println("High Severity Alerts:"+highAlerts.size());
+        for(SecurityAlert a: highAlerts){
+            System.out.println("- "+a.description());
+        }
         // TODO: Print formatted report using text block
         var total = manager.findBySeverity("LOW").size() + manager.findBySeverity("MEDIUM").size() + manager.findBySeverity("HIGH").size() + manager.findBySeverity("CRITICAL").size();
         var highCount = manager.findBySeverity("HIGH").size();
