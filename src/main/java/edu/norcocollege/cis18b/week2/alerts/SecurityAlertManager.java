@@ -79,7 +79,7 @@ public class SecurityAlertManager {
      *  - Use modern switch expression
      *  - Throw IllegalArgumentException for unknown severity
      */
-    public String getSeverityRecommendation(SecurityAlert alert) {
+    public String getSeverityRecommendation(Object alert) {
         //validate alert
         if(alert==null){
             throw new IllegalArgumentException("Alert cannot be null");
@@ -94,5 +94,7 @@ public class SecurityAlertManager {
                 default -> throw new IllegalArgumentException("Unknown severity: "+a.severity());
             };
         }
+        //the provided object wasn't a SecurityAlert
+        throw new IllegalArgumentException("Expected SecurityAlert instance");
     }
 }
