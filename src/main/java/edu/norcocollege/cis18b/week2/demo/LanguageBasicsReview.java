@@ -37,22 +37,21 @@ public class LanguageBasicsReview {
     public double eat(double lbsOfMeat){
         return lbsOfMeat*2.5;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //Custom UnknownDinosaurTypeException
+    static class UnknownDinosaurTypeException extends Exception{
+        public UnknownDinosaurTypeException(String message){
+            super(message);
+        }
+    }
+    //Diet Switch Expression
+    public String dietType(String type) throws UnknownDinosaurTypeException{
+        return switch (type.toUpperCase()){
+            case "CARNIVORE"->"Eats meat!";
+            case "HERBIVORE"->"Eats Plants!"
+            case "OMNIVORE"->"Eats both plants and meat!";
+            default -> throw new UnknownDinosaurTypeException("Unknown Dinosaur Type Diet: "+ type);
+        };
+    }
     //Demonstrate All Features
     public void demonstrate() {
         // TODO: Implement demonstration of basic Java features
