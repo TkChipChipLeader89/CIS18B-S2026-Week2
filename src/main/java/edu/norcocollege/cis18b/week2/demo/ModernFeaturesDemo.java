@@ -8,12 +8,12 @@ import java.util.Optional;
  **/
 public class ModernFeaturesDemo {
     //Record Dinosaur Type
-    public record Dinosaur(String name,String diet,int age);
+    public record Dinosaur(String name,String diet,int age){}
     //Demonstrate Modern Features
     public void demonstrate() {
         //Create Greeting
         String intro="""
-                Welcome to newly and questionable built Dinosaur Park!
+                Welcome to a newly and questionable built Dinosaur Park!
                 I hope nothing goes wrong during your tour!
                 Enjoy!
                 """;
@@ -40,5 +40,20 @@ public class ModernFeaturesDemo {
             .map(d->"Found dinosaur: "+d.name())
             .orElse("Dinosaur not found!");
         System.out.println(result);
+    
+    //Pattern Matching with Instance of
+    Object ranDino=dino3;
+    if(ranDino instanceof Dinosaur d){
+        System.out.println("Name pattern matched dinosaur: "+d.name());
+    }
+    //Modern Switch Expression
+    String dietAction=switch(dino3.diet()){
+        case "HERBIVORE"->"This dinosaur is eating plants!";
+        case "CARNIVORE"->"This dinosaur is eating meat!";
+        case "OMNIVORE" ->"This dinosaur is eating both!";
+        default -> "Unknown diet.";
+    };
+    System.out.println(dietAction);
+    System.out.println("Modern Features Completed!");
     }
 }
